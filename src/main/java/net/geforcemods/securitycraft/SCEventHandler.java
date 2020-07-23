@@ -160,6 +160,9 @@ public class SCEventHandler {
 			if(tileEntity != null && tileEntity instanceof CustomizableSCTE && PlayerUtils.isHoldingItem(event.entityPlayer, SCContent.universalBlockModifier)){
 				event.setCanceled(true);
 
+				if(((CustomizableSCTE) tileEntity).getNumberOfCustomizableOptions() == 0)
+					return;
+
 				if(!(((IOwnable) tileEntity)).getOwner().isOwner(event.entityPlayer)){
 					PlayerUtils.sendMessageToPlayer(event.entityPlayer, StatCollector.translateToLocal("item.securitycraft:universalBlockModifier.name"), StatCollector.translateToLocal("messages.securitycraft:notOwned").replace("#", ((IOwnable) tileEntity).getOwner().getName()), EnumChatFormatting.RED);
 					return;
